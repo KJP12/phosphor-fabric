@@ -1,15 +1,11 @@
-plugins {
-    id 'fabric-loom' version '0.2.7-SNAPSHOT'
+/*plugins {
     id "com.matthewprenger.cursegradle" version "1.4.0"
-}
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+}*/
 
 archivesBaseName = "${project.archives_base_name}-mc${project.minecraft_version}"
 group = project.maven_group
 
-def build_id = System.getenv("GITHUB_RUN_NUMBER");
+def build_id = System.getenv("GITHUB_RUN_NUMBER")
 
 if (build_id == null) {
     version = "${project.mod_version}-SNAPSHOT"
@@ -22,48 +18,7 @@ minecraft {
     accessWidener = file("src/main/resources/phosphor.accesswidener")
 }
 
-dependencies {
-	//to change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
-}
-
-processResources {
-	inputs.property "version", project.version
-
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
-
-		expand "version": project.version
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
-	}
-}
-
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
-}
-
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = "sources"
-	from sourceSets.main.allSource
-    from "LICENSE"
-}
-
-jar {
-    from "LICENSE"
-}
-
-def cf_api_token = System.getenv("CF_API_TOKEN")
+/*def cf_api_token = System.getenv("CF_API_TOKEN")
 
 curseforge {
     // If the environment variable does not exist,
@@ -86,4 +41,4 @@ curseforge {
         javaIntegration = false
         forgeGradleIntegration = false
     }
-}
+}*/
