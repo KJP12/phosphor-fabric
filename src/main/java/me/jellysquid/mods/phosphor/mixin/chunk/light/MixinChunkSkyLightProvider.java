@@ -1,7 +1,7 @@
 package me.jellysquid.mods.phosphor.mixin.chunk.light;
 
-import me.jellysquid.mods.phosphor.common.chunk.light.ChunkLightProviderExtended;
 import me.jellysquid.mods.phosphor.common.chunk.level.LevelPropagatorExtended;
+import me.jellysquid.mods.phosphor.common.chunk.light.ChunkLightProviderExtended;
 import me.jellysquid.mods.phosphor.common.util.LightUtil;
 import me.jellysquid.mods.phosphor.common.util.math.ChunkSectionPosHelper;
 import me.jellysquid.mods.phosphor.common.util.math.DirectionHelper;
@@ -192,7 +192,7 @@ public abstract class MixinChunkSkyLightProvider extends ChunkLightProvider<SkyL
         // Skylight optimization: Try to find bottom-most non-empty chunk
         if (localY == 0) {
             while (!this.lightStorage.hasLight(ChunkSectionPos.offset(chunkId, 0, -chunkOffsetY - 1, 0))
-                    && this.lightStorage.isAboveMinimumHeight(chunkY - chunkOffsetY - 1)) {
+                    && this.lightStorage.isAboveMinHeight(chunkY - chunkOffsetY - 1)) {
                 ++chunkOffsetY;
             }
         }
